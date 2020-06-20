@@ -317,13 +317,9 @@ const PokemonBackup = () => {
         const [ searchNameValue, setSearchNameValue ] = useState("");
         const [ searchHitPointValue, setSearchHitPointValue ] = useState("");
         const [ searchRarityValue, setSearchRarityValue ] = useState("");
-        const [ hitPointOperator, setHitPointOperator ] = useState("eq");
-        const [ hitPointLabel, setHitPointLabel] = useState("Equal");
         const [ hitPointObject, setHitPointObject] = useState({ value: 'eq', label: 'Equal'});
 
         const handleOperatorSelection = (option) => {
-            setHitPointOperator(option.value);
-            setHitPointLabel(option.label);
             setHitPointObject(option);
         }
 
