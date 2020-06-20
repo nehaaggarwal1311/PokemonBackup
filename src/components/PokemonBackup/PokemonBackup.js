@@ -208,7 +208,7 @@ const PokemonBackup = () => {
         }, (error) => {
             setFeedbackMessage("Error saving to database")
         }).catch((err) => {
-            console.log("catch");
+            setFeedbackMessage("Error")
         });
     }
 
@@ -229,7 +229,6 @@ const PokemonBackup = () => {
         let operator = hitPointObject.value || "eq";
         const numericHitPoint = Number(hitPoint);
        let url = `http://localhost:5000/backups/get?name=${name}&rarity=${rarity}&hp=${numericHitPoint}&op=${operator}`
-       console.log(url);
         fetch(url)
         .then((res) => {
             return res.json();
@@ -237,21 +236,18 @@ const PokemonBackup = () => {
             setFeedbackMessage("Unexpected response from server");
             throw error;
         }).then((jsonResponse) => {
-            console.log("success", jsonResponse);
             if (jsonResponse && jsonResponse.result && jsonResponse.result.length) {
                 setFeedbackMessage("Saved to database")
                 setSearchResults(jsonResponse.result);
             } else setFeedbackMessage("No results found for the search criteria.")
         }, (error) => {
-            console.log("error");
             setFeedbackMessage("Error saving to database")
         }).catch((err) => {
-            console.log("catch herereteyet");
+		setFeedbackMessage("Error")
         });
     }
 
     const searchInBackup = ({rarity, hitPoint, name, hitPointObject}) => {
-        console.log(`Search for hit:${hitPoint || "null/undef"} | rarity:${rarity|| "null/undef"} | name:${name || "null/undef"}`)
         getSearchResults(hitPoint, rarity, name, hitPointObject);
     }
 
@@ -260,7 +256,6 @@ const PokemonBackup = () => {
         setSearchClicked(false);
         getCardsInfo()
             .then((response) => {
-                console.log(response.cards);
                 const data = response.cards;
                 setCardsData(data);
                 setDownloadedCounter(downloadedCounter + 1);
@@ -268,12 +263,9 @@ const PokemonBackup = () => {
                 return data;
             })
         .catch((err) => {
-            console.log("catch");
             setFeedbackMessage("Error getting cards from source")
-            //setError(err);
         })
         .finally(() => {
-            console.log("finally");
             //setIsLoading(false);
         });
 
