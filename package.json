@@ -1,0 +1,36 @@
+{
+	"name": "pokemon-server",
+	"version": "1.0.0",
+	"description": "Application that helps preserve pokemons",
+	"author": "Neha Aggarwal",
+	"license": "ISC",
+	"babel": {
+		"presets": [
+			"@babel/preset-env",
+			"@babel/preset-react"
+		],
+		"plugins": [
+			[
+				"@babel/plugin-transform-runtime",
+				{
+					"regenerator": true
+				}
+			]
+		]
+	},
+	"browser": {
+		"child_process": false
+	},
+	"scripts": {
+		"start": "nodemon ./server.js",
+		"server": "nodemon ./server.js",
+		"test": "jest"
+	},
+	"dependencies": {
+		"cors": "^2.8.5",
+		"express": "^4.17.1",
+		"express-generator": "^4.16.1",
+		"mongodb": "^3.5.9",
+		"nodemon": "^2.0.4"
+	}
+}
