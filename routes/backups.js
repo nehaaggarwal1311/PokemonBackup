@@ -41,14 +41,12 @@ const purgeBackup = async (req, res) => {
 
 	  db.collection(constants.DB_COLLECTION_NAME).drop(function(err, delOK) {
 		if (err) {
-			console.log("drop error")
 			throw err;
 			return res.json({
 				err
 			});
 		}
 		if (delOK) {
-			console.log("Collection deleted");
 			return res.json({
 				delOK
 		});
@@ -71,7 +69,6 @@ const purgeBackup = async (req, res) => {
 }
 
 const searchBackup = async (req, res) => {
-	console.log("req", req.query);
 	const params = [];
 
 	const { hp, rarity, name, op } = req.query || {};
@@ -85,10 +82,8 @@ const searchBackup = async (req, res) => {
 			params.push({[key]: {$regex: reg, $options : 'i'}})
 		}
 	})
-	console.log(JSON.stringify(params));
 
 	let SearchCriteria = {$and : params};
-	console.log(SearchCriteria);
 
 	const client = getDbClient();
     await client.connect();
@@ -97,7 +92,6 @@ const searchBackup = async (req, res) => {
 
 	db.collection(constants.DB_COLLECTION_NAME).find(SearchCriteria).toArray((err, result) => {
 		if (err) throw err;
-		//console.log(result);
 		return res.json({
  				result
 			});
