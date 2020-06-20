@@ -74,7 +74,10 @@ const searchBackup = async (req, res) => {
 	const { hp, rarity, name, op } = req.query || {};
 	Object.keys(req.query).map((key) => {
 		if ("hp" == key && req.query[key]){
-			params.push({hp: {[`$${op}`]: Number(req.query[key])}})
+			let hpNumber = Number(req.query[key]);
+			if (hpNumber && hpNumber > 0) {
+				params.push({hp: {[`$${op}`]: hpNumber}})
+			}
 		} else if ("rarity" == key && req.query[key]){
 			params.push({rarity: req.query[key]})
 		} else if ("name" == key && req.query[key]){
